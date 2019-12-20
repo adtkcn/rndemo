@@ -7,7 +7,8 @@ import {
 	View,
 	Text,
 	Image,
-	TouchableHighlight
+	TouchableHighlight,
+	TouchableNativeFeedback
 } from 'react-native';
 
 // let List = (props) => {
@@ -20,7 +21,7 @@ class List extends Component {
 			<View>
 				{
 					[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => {
-						return <TouchableHighlight onPress={ () => { alert(item) } } key={ item }>
+						return <TouchableNativeFeedback onPress={ () => { alert(item) } } key={ item } background={ TouchableNativeFeedback.SelectableBackground() }>
 							<View style={ styles.lists } >
 								<Image style={ styles.listsTouxiang } source={ require('../image/touxiang.jpg') }></Image>
 								<View style={ styles.listsContent }>
@@ -33,7 +34,7 @@ class List extends Component {
 									<Text style={ styles.listsContentDes }>干啥呢</Text>
 								</View>
 							</View>
-						</TouchableHighlight>
+						</TouchableNativeFeedback>
 
 					})
 				}
