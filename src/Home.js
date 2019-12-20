@@ -36,27 +36,31 @@ class App extends Component {
 
 		return (
 			<>
-				<StatusBar barStyle="dark-content" />
+				<StatusBar barStyle="dark-content" backgroundColor="#ccc" />
 				<SafeAreaView>
-
+					<View style={ [style.row, style.header] }>
+						<Text style={ [style.flex_1, style.headerName] }>恒信(1)</Text>
+						<Text>图标</Text>
+					</View>
 					<ScrollView
 						contentInsetAdjustmentBehavior="automatic"
-						style={ styles.scrollView }>
+						style={ style.scrollView }>
 
 						<View>
 							<List></List>
+							<Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } />
 						</View>
 						{/* <Com></Com> */ }
 						{/* <List></List> */ }
 						{/* <Com></Com> */ }
-						<View style={ styles.body }>
-
-							<TextInput style={ styles.input } defaultValue={ this.state.val } onChangeText={ (val) => this.setState({ val: val }) }></TextInput>
-
-							<Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } />
 
 
-						</View>
+						{/* <TextInput style={ style.input } defaultValue={ this.state.val } onChangeText={ (val) => this.setState({ val: val }) }></TextInput> */ }
+
+
+
+
+
 					</ScrollView>
 				</SafeAreaView>
 			</>
@@ -65,15 +69,28 @@ class App extends Component {
 
 };
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
+	scrollView: {
 
-
+	},
+	row: {
+		flexDirection: "row"
+	},
+	flex_1: {
+		flex: 1,
+	},
+	header: {
+		paddingTop: 10,
+		paddingRight: 10,
+		paddingBottom: 10,
+		paddingLeft: 10,
+		backgroundColor: "#ccc"
+	},
+	headerName: { fontSize: 18 },
 	input: {
 		marginTop: 40,
 		marginBottom: 20,
 		backgroundColor: '#ccc'
-		// textShadowColor: "gray",
-		// textShadowOffset: { width: 2, height: 5 }
 	},
 	close: {
 		marginTop: 12,
