@@ -2,10 +2,17 @@
   "name": "demo",
   "version": "0.0.1",
   "private": true,
+  "keytool": {
+    "pwd": "wxdemo"
+  },
   "scripts": {
     "android": "react-native run-android",
+    "build": "react-native run-android --variant=release",
+    "build_aab": "cd android & gradlew bundleRelease",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "clean": "cd android & gradlew clean",
+    "key": "keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
     "test": "jest",
     "lint": "eslint ."
   },

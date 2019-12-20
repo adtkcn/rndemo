@@ -20,7 +20,7 @@ class List extends Component {
 			<View>
 				{
 					[1, 2, 3].map((item) => {
-						return <View style={ styles.lists }>
+						return <View style={ styles.lists } key={ item }>
 							<Image style={ styles.listsTouxiang } source={ require('../image/touxiang.jpg') }></Image>
 							<View style={ styles.listsContent }>
 								<Text style={ styles.listsContentName }>月</Text>
