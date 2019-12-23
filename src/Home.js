@@ -32,8 +32,8 @@ class App extends Component {
 		console.log(data);
 
 	}
-	_onRefresh(e) {
-		console.log(e);
+	_onRefresh() {
+		console.log("开始刷新");
 		this.setState({ refreshing: true });
 		setTimeout(() => {
 			this.setState({ refreshing: false });
