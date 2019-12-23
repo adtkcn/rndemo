@@ -11,6 +11,8 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Home from "./src/Home.js";
+import Contact from "./src/Contact.js";
+
 import Setting from "./src/Setting.js";
 import Login from "./src/setting/Login.js";
 
@@ -19,20 +21,37 @@ const TabStack = createBottomTabNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      // title: "ddd"
-      header: null//去掉标题栏
+      title: "消息",
+      // header: null//去掉标题栏
+    }
+  },
+  Contact: {
+    screen: Contact,
+    navigationOptions: {
+      title: "通信录",
+      // header: null//去掉标题栏
     }
   },
   Setting: {
     screen: Setting,
     navigationOptions: {
-      header: null//去掉标题栏
+      title: "设置",
+      // header: null//去掉标题栏
     }
   }
 }, {
   initialRouteName: 'Home',
+  tabBarOptions: {
+    showIcon: false,
+    labelStyle: {
+      fontSize: 16,
+      paddingBottom: 10
+
+    }
+  },
   defaultNavigationOptions: {
-    header: null,//去掉标题栏
+    // header: null,//去掉标题栏      
+
     // headerStyle: {
     //   backgroundColor: '#f4511e',
     // },

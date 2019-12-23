@@ -9,7 +9,11 @@ import {
 	Text,
 	Button,
 	StatusBar,
+	Image,
+	TouchableOpacity
 } from 'react-native';
+
+import Line from "./components/Line.js";
 
 let App = (props) => {
 	const [count, setCount] = useState(1);
@@ -17,20 +21,53 @@ let App = (props) => {
 
 	return (
 		<>
-			<StatusBar barStyle="dark-content" />
+			<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
 			<SafeAreaView>
 				<ScrollView
 					contentInsetAdjustmentBehavior="automatic"
-					style={ styles.scrollView }>
+					style={ style.scrollView }>
 
-					<View style={ styles.body }>
+					<View style={ style.body }>
+						<View style={ style.lists } >
+							<View style={ style.row }>
+								<Text style={ [style.flex_1, style.listTitle] }>头像</Text>
+								<Image style={ [style.alignSelfCenter, style.listsTouxiang] } roundAsCircle={ true } resizeMode={ 'stretch' } source={ require('./image/touxiang.jpg') }></Image>
+								<Text style={ [style.alignSelfCenter, style.listArrow] }> > </Text>
+							</View>
+							<Line offsetLeft={ 0 } offsetRight={ 0 } ></Line>
+						</View>
 
+						<View style={ style.lists } >
+							<View style={ style.row }>
+								<Text style={ [style.flex_1, style.listTitle] }>昵称</Text>
+								<Text style={ [style.alignSelfCenter, style.listSubTitle] }> ++ </Text>
+								<Text style={ [style.alignSelfCenter, style.listArrow] }> > </Text>
+							</View>
+							<Line offsetLeft={ 0 } offsetRight={ 0 } ></Line>
+						</View>
 
-						<Text>{ count }</Text>
+						<View style={ style.lists } >
+							<View style={ style.row }>
+								<Text style={ [style.flex_1, style.listTitle] }>账号</Text>
+								<Text style={ [style.alignSelfCenter, style.listSubTitle] }> nin </Text>
+								<Text style={ [style.alignSelfCenter, style.listArrow] }>  </Text>
+							</View>
+							<Line offsetLeft={ 0 } offsetRight={ 0 } ></Line>
+						</View>
 
-						<Button title="add count" onPress={ () => setCount(count + 1) } />
+						{/* <Text>{ count }</Text>
+						<Button title="add count" onPress={ () => setCount(count + 1) } /> */}
 
-						<Button title="用户登录" onPress={ () => props.navigation.push("Login", { count: count }) } />
+						<TouchableOpacity style={ style.btns } onPress={ () => props.navigation.push("Login", { count: count }) }>
+
+							<Text style={ style.btn }> 切换账号</Text>
+
+						</TouchableOpacity>
+
+						<View >
+							{/* <Button style={ style.btn } backgroundColor={ "white" } title="切换账号" onPress={ () => props.navigation.push("Login", { count: count }) } /> */ }
+						</View>
+
 
 					</View>
 				</ScrollView>
@@ -41,17 +78,50 @@ let App = (props) => {
 
 };
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
 
-	engine: {
-		position: 'absolute',
-		right: 0,
+	row: {
+		flexDirection: "row"
+	},
+	flex_1: {
+		flex: 1,
+	},
+	alignSelfCenter: {
+		alignSelf: "center"
 	},
 
-	close: {
-		marginTop: 12,
-		backgroundColor: "gray",
+	listsTouxiang: {
+		width: 50,
+		height: 50,
+		borderRadius: 20,
+		marginRight: 20
+	},
+	lists: {
+		position: "relative",
+		marginLeft: 10
+	},
+	listTitle: {
+		lineHeight: 60,
 	},
 
+	listSubTitle: {
+		color: "#ccc",
+		marginRight: 20
+	},
+	listArrow: {
+		position: "absolute",
+		right: 2,
+		color: "#ccc",
+	},
+	btns: {
+		marginTop: 50,
+		height: 100
+	},
+	btn: {
+		backgroundColor: "green",
+		color: "white",
+		textAlign: "center",
+		padding: 10
+	}
 });
 export default App;

@@ -10,7 +10,8 @@ import {
 	Button,
 	StatusBar,
 	TextInput,
-	FlatList
+	FlatList,
+	RefreshControl
 } from 'react-native';
 
 import List from "./home/List.js";
@@ -23,45 +24,53 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			val: "12311"
+			val: "12311",
+			refreshing: false
 		}
 	}
-	render() {
-		var arr = [1, 2, 3];
-		var Com = arr.map((item) => {
-			return (<View key={ item } ><List ></List></View>)
-			// return (<List key={ item }></List>)
-		})
-		console.log(Com);
+	clickItem(data) {
+		console.log(data);
 
+	}
+	_onRefresh(e) {
+		console.log(e);
+		this.setState({ refreshing: true });
+		setTimeout(() => {
+			this.setState({ refreshing: false });
+		}, 1000);
+	}
+	render() {
 		return (
 			<>
-				<StatusBar barStyle="dark-content" backgroundColor="#ccc" />
+				<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
 				<SafeAreaView>
 					<View style={ [style.row, style.header] }>
 						<Text style={ [style.flex_1, style.headerName] }>恒信(1)</Text>
-						<Text>图标</Text>
+						<Text>+</Text>
 					</View>
-					<ScrollView
+					{/* automatic:scrollView会自动计算和适应顶部和底部的内边距并且在scrollView 不可滚动时,也会设置内边距. */ }
+					{/* <ScrollView
 						contentInsetAdjustmentBehavior="automatic"
-						style={ style.scrollView }>
-
-						<View>
-							<List></List>
-							<Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } />
-						</View>
-						{/* <Com></Com> */ }
-						{/* <List></List> */ }
-						{/* <Com></Com> */ }
-
-
-						{/* <TextInput style={ style.input } defaultValue={ this.state.val } onChangeText={ (val) => this.setState({ val: val }) }></TextInput> */ }
-
-
-
-
-
-					</ScrollView>
+						style={ style.scrollView }
+						refreshControl={
+							<RefreshControl
+								refreshing={ this.state.refreshing }
+								onRefresh={ () => this._onRefresh() }
+							/>
+						}>
+ 
+						<Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } />
+					</ScrollView> */}
+					<FlatList style={ style.scrollView }
+						showsVerticalScrollIndicator={ false }
+						refreshing={ this.state.refreshing }
+						onRefresh={ () => this._onRefresh() }
+						ListEmptyComponent={ <Text>空空如也</Text> }
+						data={ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+						keyExtractor={ (item, index) => index.toString() }
+						renderItem={ (item) => <List data={ item.item } click={ (d) => { this.clickItem(d) } } ></List >
+						}>
+					</FlatList>
 				</SafeAreaView>
 			</>
 		);
@@ -71,7 +80,7 @@ class App extends Component {
 
 const style = StyleSheet.create({
 	scrollView: {
-
+		marginBottom: 44
 	},
 	row: {
 		flexDirection: "row"
@@ -84,18 +93,8 @@ const style = StyleSheet.create({
 		paddingRight: 10,
 		paddingBottom: 10,
 		paddingLeft: 10,
-		backgroundColor: "#ccc"
+		backgroundColor: "#efefef"
 	},
 	headerName: { fontSize: 18 },
-	input: {
-		marginTop: 40,
-		marginBottom: 20,
-		backgroundColor: '#ccc'
-	},
-	close: {
-		marginTop: 12,
-		backgroundColor: "gray",
-	},
-
 });
 export default App;

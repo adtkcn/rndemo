@@ -18,34 +18,27 @@ class List extends Component {
 	// useEffect(() => { console.log("每次都会执行") }, [count])
 	render() {
 		return (
-			<View>
-				{
-					[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => {
-						return <TouchableNativeFeedback onPress={ () => { alert(item) } } key={ item } background={ TouchableNativeFeedback.SelectableBackground() }>
-							<View style={ styles.lists } >
-								<Image style={ styles.listsTouxiang } source={ require('../image/touxiang.jpg') }></Image>
-								<View style={ styles.listsContent }>
-									<View style={ styles.listsContentTitle }>
-										<Text style={ styles.listsContentName } numberOfLines={ 1 }>月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月</Text>
-										<Text style={ styles.listsContentTime }>10:06</Text>
 
-									</View>
+			<TouchableNativeFeedback onPress={ () => { this.props.click(this.props.data) } } background={ TouchableNativeFeedback.SelectableBackground() }>
+				<View style={ style.lists } >
+					<Image style={ style.listsTouxiang } roundAsCircle={ true } resizeMode={ 'stretch' } source={ require('../image/touxiang.jpg') }></Image>
+					<View style={ style.listsContent }>
+						<View style={ style.listsContentTitle }>
+							<Text style={ style.listsContentName } numberOfLines={ 1 }>月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月</Text>
+							<Text style={ style.listsContentTime }>10:06</Text>
+						</View>
 
-									<Text style={ styles.listsContentDes }>干啥呢</Text>
-								</View>
-							</View>
-						</TouchableNativeFeedback>
+						<Text style={ style.listsContentDes }>{ JSON.stringify(this.props.data) }</Text>
+					</View>
+				</View>
+			</TouchableNativeFeedback>
 
-					})
-				}
-
-			</View>
 		);
 	}
 
 };
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
 
 	lists: {
 		flexDirection: 'row',
@@ -56,10 +49,11 @@ const styles = StyleSheet.create({
 	listsTouxiang: {
 		width: 50,
 		height: 50,
+		borderRadius: 20,
 	},
 	listsContent: {
 		borderBottomColor: "#ccc",
-		borderBottomWidth: 1,
+		borderBottomWidth: StyleSheet.hairlineWidth,// 1,符合平台最细的线
 		flex: 1,
 		marginLeft: 10,
 		paddingBottom: 12,
