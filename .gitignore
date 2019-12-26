@@ -58,6 +58,4 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-.vscode/
-.vscode/.react/index.map
-.vscode/.react/index.bundle
+.vscode/ 
