@@ -30,7 +30,7 @@ class App extends Component {
 	}
 	clickItem(data) {
 		console.log(data);
-
+		this.props.navigation.push("Chat", { data })
 	}
 	_onRefresh() {
 		console.log("开始刷新");

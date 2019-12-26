@@ -15,7 +15,7 @@ import Contact from "./src/Contact.js";
 
 import Setting from "./src/Setting.js";
 import Login from "./src/setting/Login.js";
-
+import Chat from "./src/Chat.js";
 
 const TabStack = createBottomTabNavigator({
   Home: {
@@ -49,17 +49,7 @@ const TabStack = createBottomTabNavigator({
 
     }
   },
-  defaultNavigationOptions: {
-    // header: null,//去掉标题栏      
-
-    // headerStyle: {
-    //   backgroundColor: '#f4511e',
-    // },
-    // headerTintColor: '#fff',
-    // headerTitleStyle: {
-    //   fontWeight: 'bold',
-    // },
-  }
+  defaultNavigationOptions: {}
 });
 
 let AppStack = createStackNavigator({
@@ -69,6 +59,7 @@ let AppStack = createStackNavigator({
       header: null//去掉标题栏
     }
   },
+  Chat: Chat,
   Login: Login
 })
 
