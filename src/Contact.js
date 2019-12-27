@@ -46,7 +46,7 @@ class App extends Component {
 		return (
 			<>
 				<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
-				<SafeAreaView>
+				<SafeAreaView style={ { flex: 1, backgroundColor: '#efefef' } }>
 					<View style={ [style.row, style.header] }>
 						<Text style={ [style.flex_1, style.headerName] }>通讯录</Text>
 					</View>
@@ -64,7 +64,6 @@ class App extends Component {
 					>
 					</FlatList> */}
 					<SectionList
-						style={ style.listBox }
 						showsVerticalScrollIndicator={ false }
 						stickySectionHeadersEnabled={ true }
 						refreshing={ this.state.refreshing }
@@ -112,9 +111,7 @@ const style = StyleSheet.create({
 		borderBottomColor: "#ccc",
 		borderBottomWidth: StyleSheet.hairlineWidth,// 1,符合平台最细的线
 	},
-	listBox: {
-		marginBottom: 44
-	},
+
 	row: {
 		flexDirection: "row"
 	},

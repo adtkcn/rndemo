@@ -22,7 +22,7 @@ let App = (props) => {
 	return (
 		<>
 			<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
-			<SafeAreaView>
+			<SafeAreaView style={ { flex: 1, backgroundColor: '#efefef' } }>
 				<ScrollView
 					contentInsetAdjustmentBehavior="automatic"
 					style={ style.scrollView }>

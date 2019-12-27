@@ -4,22 +4,25 @@ import React, { Component } from 'react';
 import {
 	SafeAreaView,
 	StyleSheet,
-	ScrollView,
 	View,
 	Text,
-	Button,
 	StatusBar,
 	TextInput,
 	FlatList,
-	RefreshControl
+	TouchableOpacity
 } from 'react-native';
 
 import List from "./chat/List.js";
 
 class App extends Component {
 
-	static navigationOptions = {
-		title: "user name"
+	static navigationOptions = ({ navigation }) => {
+		// const { params } = navigation.state;
+		console.log(navigation.state);
+		// console.log(params);
+		return {
+			title: navigation.getParam("username", "无名氏")
+		}
 	};
 	constructor(props) {
 		super(props);
@@ -29,6 +32,10 @@ class App extends Component {
 	}
 	clickItem(data) {
 		console.log(data);
+	}
+	_onPressButton(data) {
+		console.log(data);
+
 	}
 	_onRefresh() {
 		console.log("开始刷新");
@@ -41,19 +48,29 @@ class App extends Component {
 		return (
 			<>
 				<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
-				<SafeAreaView>
-					<View style={ style.background }>
-						<FlatList style={ style.scrollView }
-							inverted={ true }
-							showsVerticalScrollIndicator={ false }
-							// refreshing={ this.state.refreshing }
-							// onRefresh={ () => this._onRefresh() }
-							ListEmptyComponent={ <Text>空空如也</Text> }
-							data={ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
-							keyExtractor={ (item, index) => index.toString() }
-							renderItem={ (item) => <List data={ item.item } click={ (d) => { this.clickItem(d) } } ></List >
-							}>
-						</FlatList>
+				<SafeAreaView style={ { flex: 1, backgroundColor: '#efefef' } }>
+
+					<FlatList style={ style.scrollView }
+						inverted={ true }
+						showsVerticalScrollIndicator={ false }
+						// refreshing={ this.state.refreshing }
+						// onRefresh={ () => this._onRefresh() }
+						ListEmptyComponent={ <Text>空空如也</Text> }
+						data={ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+						keyExtractor={ (item, index) => index.toString() }
+						renderItem={ (item) => <List data={ item.item } click={ (d) => { this.clickItem(d) } } ></List >
+						}>
+					</FlatList>
+					{/* <View><TextInput placeholder="1"></TextInput></View> */ }
+					<View >
+
+						<View style={ style.btnContainer }>
+							<TextInput style={ style.TextInput } multiline  ></TextInput>
+							<TouchableOpacity style={ style.sendContainer } onPress={ () => this._onPressButton() } >
+								<Text style={ style.send }>发送</Text>
+							</TouchableOpacity>
+						</View>
+
 					</View>
 
 				</SafeAreaView>
@@ -64,10 +81,8 @@ class App extends Component {
 };
 
 const style = StyleSheet.create({
-	background: { backgroundColor: "#ccc" },
-	scrollView: {
 
-		// marginBottom: 44
+	scrollView: {
 	},
 	row: {
 		flexDirection: "row"
@@ -75,6 +90,33 @@ const style = StyleSheet.create({
 	flex_1: {
 		flex: 1,
 	},
+	btnContainer: {
+		flexDirection: "row",
+		padding: 3,
+		// paddingVertical: 3
+	},
+	TextInput: {
+		flex: 1,
+		marginRight: 3,
+		paddingVertical: 0,
+		minHeight: 36,
+		maxHeight: 160,
+		backgroundColor: "white"
+	},
+	sendContainer: {
+		alignSelf: "flex-end"
+	},
+	send: {
+		// borderColor: "red",
+		// borderWidth: 1,
+		paddingHorizontal: 13,
+		backgroundColor: "white",
+		height: 36,
+		lineHeight: 36,
+		fontSize: 14
 
+	}
 });
+console.log(style);
+
 export default App;

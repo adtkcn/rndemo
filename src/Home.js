@@ -16,6 +16,8 @@ import {
 
 import List from "./home/List.js";
 
+import { creactAxios, http } from './config/axios.js'
+
 class App extends Component {
 
 	// static navigationOptions = {
@@ -30,7 +32,7 @@ class App extends Component {
 	}
 	clickItem(data) {
 		console.log(data);
-		this.props.navigation.push("Chat", { data })
+		this.props.navigation.navigate("Chat", { ...data })
 	}
 	_onRefresh() {
 		console.log("开始刷新");
@@ -39,34 +41,32 @@ class App extends Component {
 			this.setState({ refreshing: false });
 		}, 1000);
 	}
+	componentDidMount() {
+		console.log(http);
+
+		http.get('/').then((d) => {
+			console.log(d);
+		}).catch((e) => {
+			console.log(e);
+		})
+	}
 	render() {
 		return (
 			<>
 				<StatusBar barStyle="dark-content" backgroundColor="#efefef" />
-				<SafeAreaView>
+				<SafeAreaView style={ { flex: 1, backgroundColor: '#efefef' } }>
 					<View style={ [style.row, style.header] }>
 						<Text style={ [style.flex_1, style.headerName] }>恒信(1)</Text>
 						<Text>+</Text>
 					</View>
-					{/* automatic:scrollView会自动计算和适应顶部和底部的内边距并且在scrollView 不可滚动时,也会设置内边距. */ }
-					{/* <ScrollView
-						contentInsetAdjustmentBehavior="automatic"
-						style={ style.scrollView }
-						refreshControl={
-							<RefreshControl
-								refreshing={ this.state.refreshing }
-								onRefresh={ () => this._onRefresh() }
-							/>
-						}>
- 
-						<Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } />
-					</ScrollView> */}
+					{/* <Button title="打开设置" onPress={ () => this.props.navigation.navigate("Setting") } /> */ }
+
 					<FlatList style={ style.scrollView }
 						showsVerticalScrollIndicator={ false }
 						refreshing={ this.state.refreshing }
 						onRefresh={ () => this._onRefresh() }
 						ListEmptyComponent={ <Text>空空如也</Text> }
-						data={ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+						data={ [{ uid: 1, username: "yue", msg: "hello", time: "10:26" }, { uid: 2, username: "yue2", msg: "world", time: "10:25" }] }
 						keyExtractor={ (item, index) => index.toString() }
 						renderItem={ (item) => <List data={ item.item } click={ (d) => { this.clickItem(d) } } ></List >
 						}>
@@ -80,7 +80,7 @@ class App extends Component {
 
 const style = StyleSheet.create({
 	scrollView: {
-		marginBottom: 44
+
 	},
 	row: {
 		flexDirection: "row"

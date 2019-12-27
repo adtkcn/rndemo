@@ -25,13 +25,14 @@ class List extends Component {
 					<View style={ style.lists } >
 						<Image style={ style.listsTouxiang } roundAsCircle={ true } resizeMode={ 'stretch' } source={ require('../image/touxiang.jpg') }></Image>
 						<View style={ style.listsContent }>
-							<Text style={ style.listsContentText } >11</Text>
+							<Text style={ style.listsContentText } >{ this.props.data }</Text>
 						</View>
 					</View>
+
 					<View style={ [style.lists, style.listsRight] } >
 						<Image style={ style.listsTouxiang } roundAsCircle={ true } resizeMode={ 'stretch' } source={ require('../image/touxiang.jpg') }></Image>
 						<View style={ style.listsContent }>
-							<Text style={ style.listsContentText } >22aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+							<Text style={ style.listsContentText } >{ this.props.data }</Text>
 						</View>
 					</View>
 				</View>
@@ -48,7 +49,8 @@ const style = StyleSheet.create({
 		flexDirection: 'row',
 		paddingTop: 8,
 		paddingLeft: 10,
-		backgroundColor: "white"
+		// backgroundColor: "white"
+		backgroundColor: '#efefef'
 	},
 	listsRight: {
 		flexDirection: "row-reverse"
@@ -59,7 +61,6 @@ const style = StyleSheet.create({
 		borderRadius: 20,
 	},
 	listsContent: {
-
 		borderRadius: 10,
 		maxWidth: "68%",
 		// flex: 1,
@@ -67,7 +68,7 @@ const style = StyleSheet.create({
 		marginLeft: 10,
 		padding: 10,
 
-		backgroundColor: "#ccc"
+		backgroundColor: "white"
 	},
 
 	listsContentText: {

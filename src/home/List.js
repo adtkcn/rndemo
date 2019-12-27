@@ -17,6 +17,7 @@ class List extends Component {
 	// const [count, setCount] = useState(1);
 	// useEffect(() => { console.log("每次都会执行") }, [count])
 	render() {
+		var info = this.props.data || {};
 		return (
 
 			<TouchableNativeFeedback onPress={ () => { this.props.click(this.props.data) } } background={ TouchableNativeFeedback.SelectableBackground() }>
@@ -24,11 +25,11 @@ class List extends Component {
 					<Image style={ style.listsTouxiang } roundAsCircle={ true } resizeMode={ 'stretch' } source={ require('../image/touxiang.jpg') }></Image>
 					<View style={ style.listsContent }>
 						<View style={ style.listsContentTitle }>
-							<Text style={ style.listsContentName } numberOfLines={ 1 }>月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月月</Text>
-							<Text style={ style.listsContentTime }>10:06</Text>
+							<Text style={ style.listsContentName } numberOfLines={ 1 }>{ info.username }</Text>
+							<Text style={ style.listsContentTime }>{ info.time }</Text>
 						</View>
 
-						<Text style={ style.listsContentDes }>{ JSON.stringify(this.props.data) }</Text>
+						<Text style={ style.listsContentDes } numberOfLines={ 1 }> { info.msg }</Text>
 					</View>
 				</View>
 			</TouchableNativeFeedback>
